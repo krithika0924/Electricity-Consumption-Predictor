@@ -1,0 +1,13 @@
+Month,Season,Avg_Temperature,Units_Consumed,Bill_Amount
+1,Winter,22,75,299.5
+2,Winter,26,82,321.62
+3,Summer,33,115,558.9
+4,Summer,39,135,656.1
+5,Summer,42,150,729.0
+6,Monsoon,32,125,607.5
+7,Monsoon,29,110,534.6
+8,Monsoon,28,105,510.3
+9,Post-Monsoon,29,100,378.5
+10,Post-Monsoon,28,95,362.7
+11,Winter,24,85,331.1
+12,Winter,21,78,308.98

@@ -1,7 +1,7 @@
 # ⚡ Electricity Consumption Predictor
 **AI-Powered Energy Management & Analytics Dashboard**
 
-> **A Final Year BCA Project by Krithika**
+> **A Final Year BCA Project by Krithika **
 
 This project is a full-stack, predictive SaaS (Software as a Service) application designed to forecast residential electricity consumption and calculate exact billing costs. Instead of relying on static formulas, it utilizes a Machine Learning engine to learn a household's unique behavioral patterns based on seasonal changes and temperature fluctuations.
 

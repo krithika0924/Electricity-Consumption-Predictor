@@ -299,7 +299,7 @@ def main_app():
         
         st.write("---")
         st.markdown("### 📂 Global Data Source")
-        uploaded_file = st.file_uploader("Upload your completed CSV", type=["csv"])
+        uploaded_file = st.file_uploader("Upload your completed CSV")
         
         # --- FIXED: Explicit instructions added back to the sidebar! ---
         with st.expander("ℹ️ How to use the template", expanded=True):

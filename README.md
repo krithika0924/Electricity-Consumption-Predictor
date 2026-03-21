@@ -24,7 +24,7 @@ This project is a full-stack, predictive SaaS (Software as a Service) applicatio
 * **Machine Learning:** Scikit-Learn (`RandomForestRegressor`)
 * **Data Manipulation:** Pandas
 * **Data Visualization:** Matplotlib
-* **Database:** Local JSON File System
+* **Database & Authentication:** Firebase (Firestore / Realtime Database & Firebase Auth)
 
 ---
 
@@ -41,6 +41,15 @@ cd Electricity-Consumption-Predictor
 
 # 3. Install the required dependencies
 pip install -r requirements.txt
+
+🔐 Firebase Configuration
+Before running the app, you need to connect it to your Firebase project:
+
+Go to your Firebase Console and generate a new private key from your Project Settings (Service Accounts).
+
+Download the JSON file and rename it to firebase_credentials.json (or whatever name your app.py script is looking for).
+
+Place this JSON file in the root directory of your project. (Note: Ensure this file is added to your .gitignore so you don't accidentally push your private keys to GitHub).
 
 # 4. Run the application
 streamlit run app.py

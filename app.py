@@ -6,6 +6,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 import matplotlib.pyplot as plt
 from streamlit_option_menu import option_menu
+import firebase_admin
+from firebase_admin import credentials, db
 
 # --- 1. Page Configuration (Must be first) ---
 st.set_page_config(page_title="Electricity Consumption Predictor", page_icon="⚡", layout="wide")
@@ -40,8 +42,16 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- 3. Secure Database Management ---
-DB_FILE = 'users.json'
+
+
+# --- 3. CLOUD DATABASE MANAGEMENT (FIREBASE) ---
+# Initialize Firebase securely using Streamlit Secrets
+if not firebase_admin._apps:
+    cred_dict = json.loads(st.secrets["FIREBASE_CREDENTIALS"])
+    cred = credentials.Certificate(cred_dict)
+    firebase_admin.initialize_app(cred, {
+        'databaseURL': st.secrets["FIREBASE_DB_URL"]
+    })
 
 SECURITY_QUESTIONS = [
     "What is the name of your first pet?",
@@ -51,16 +61,26 @@ SECURITY_QUESTIONS = [
 ]
 
 def load_users():
-    if not os.path.exists(DB_FILE):
+    # Connects to the cloud and downloads the user list
+    ref = db.reference('users')
+    data = ref.get()
+    
+    if data is None:
+        # If the database is completely empty, create the default admin account
         default_db = {"admin": {"password": "password123", "sec_q": "What is the name of your first pet?", "sec_a": "fluffy"}}
-        with open(DB_FILE, 'w') as f: json.dump(default_db, f)
+        ref.set(default_db)
         return default_db
-    with open(DB_FILE, 'r') as f: return json.load(f)
+    
+    return data
 
 def save_user(username, password, sec_q, sec_a):
-    users = load_users()
-    users[username] = {"password": password, "sec_q": sec_q, "sec_a": sec_a.lower().strip()}
-    with open(DB_FILE, 'w') as f: json.dump(users, f)
+    # Connects to the cloud and writes the new user directly to the database
+    ref = db.reference(f'users/{username}')
+    ref.set({
+        "password": password,
+        "sec_q": sec_q,
+        "sec_a": sec_a.lower().strip()
+    })
 
 # --- 3.1 Session Persistence Logic (The Refresh Fix!) ---
 if "logged_in" in st.query_params and st.query_params["logged_in"] == "true":

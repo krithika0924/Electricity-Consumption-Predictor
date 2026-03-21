@@ -34,7 +34,7 @@ Follow these steps to run the application on your local machine. Open your termi
 
 ```bash
 # 1. Clone the repository
-git clone [https://github.com/yourusername/Electricity-Consumption-Predictor.git](https://github.com/krithika0924/Electricity-Consumption-Predictor.git)
+git clone https://github.com/krithika0924/Electricity-Consumption-Predictor.git
 
 # 2. Navigate into the project folder
 cd Electricity-Consumption-Predictor
